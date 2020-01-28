@@ -30,7 +30,7 @@ module "networking" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "alteryx-testing" {
-  source = "../compute"
+  source = "../worker"
   server_port = 80
 }
 
