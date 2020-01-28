@@ -18,11 +18,11 @@ provider "aws" {
 
 module "networking" {
   source                = "./networking"
-  VPC_CIDR              = var.VPC_CIDR
-  PRIVATE_CIDRS         = var.PRIVATE_CIDRS
-  ALLACCESSIPS          = var.ALLACCESSIPS
-  ALLOWEDIPS            = var.ALLOWEDIPS
-  AWS_AVAILABILITY_ZONE = var.AWS_AVAILABILITY_ZONE
+  # VPC_CIDR              = var.VPC_CIDR
+  # PRIVATE_CIDRS         = var.PRIVATE_CIDRS
+  # ALLACCESSIPS          = var.ALLACCESSIPS
+  # ALLOWEDIPS            = var.ALLOWEDIPS
+  # AWS_AVAILABILITY_ZONE = var.AWS_AVAILABILITY_ZONE
 } 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ resource "aws_instance" "example" {
   # Ubuntu Server 18.04 LTS (HVM), SSD Volume Type in us-east-2
   ami                     = "ami-0c55b159cbfafe1f0"
   instance_type           = "t2.micro"
-  vpc_security_group_ids  = [aws_security_group.instance.id]
+  vpc_security_group_ids  = [aws_security_group.ayx_public_sg.id]
 
   user_data = <<-EOF
               #!/bin/bash

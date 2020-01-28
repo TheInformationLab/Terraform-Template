@@ -1,5 +1,6 @@
 
 *.ini
 terraform.exe
-.terraform/modules/*
+.terraform/*
 
+network.7z
