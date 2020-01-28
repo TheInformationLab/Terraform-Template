@@ -22,7 +22,7 @@ resource "aws_instance" "alteryx-testing" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "ayx_public_sg" {
-  source = "./../networking" 
+  source = "../../networking" 
 }
 
 resource "aws_security_group" "instance" {

@@ -17,7 +17,7 @@ provider "aws" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "networking" {
-  source                = "./networking"
+  source                = "../networking"
   VPC_CIDR              = var.VPC_CIDR
   PRIVATE_CIDRS         = var.PRIVATE_CIDRS
   ALLACCESSIPS          = var.ALLACCESSIPS
@@ -30,7 +30,7 @@ module "networking" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "alteryx-testing" {
-  source = "./compute"
+  source = "../compute"
   server_port = 80
 }
 
