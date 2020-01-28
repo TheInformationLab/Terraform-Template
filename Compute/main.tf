@@ -18,10 +18,11 @@ resource "aws_instance" "alteryx-testing" {
 
 # ---------------------------------------------------------------------------------------------------------------------
 # APPLY THE SECURITY GROUP THAT'S CREATED IN THE NETWORK MODULE AND APPLIED TO THE EC2 INSTANCE
+#
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "ayx_public_sg" {
-  source = "../networking" 
+  source = "./../networking" 
 }
 
 resource "aws_security_group" "instance" {
