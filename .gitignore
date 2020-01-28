@@ -1,2 +1,5 @@
 
 *.ini
+terraform.exe
+.terraform/modules/*
+
