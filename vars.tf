@@ -39,7 +39,6 @@ variable "S3_KEY_NAME_LOCATION" {
   description = "Name of ssh key file on S3"
 }
 
-
 variable "PRIVATE_CIDRS" {
 }
 
@@ -62,8 +61,8 @@ variable "admin_password" {
 }
 
 # Required for local development.
-# variable "AWS_ACCESS_KEY_ID" {
-# }
+variable "AWS_ACCESS_KEY_ID" {
+}
 
-# variable "AWS_SECRET_ACCESS_KEY" {
-# }
+variable "AWS_SECRET_ACCESS_KEY" {
+}
