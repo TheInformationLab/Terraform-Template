@@ -10,7 +10,6 @@ variable "ALLACCESSIPS" {
 }
 
 variable "ALLOWEDIPS" {
-  type = list(string)
 }
 
 variable "AWS_AVAILABILITY_ZONE" {

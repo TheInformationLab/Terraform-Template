@@ -5,7 +5,8 @@ data "aws_availability_zones" "available" {
 
 # Overall Networking Schema
 resource "aws_vpc" "ayx_vpc" {
-  cidr_block           = var.VPC_CIDR
+  # cidr_block           = var.VPC_CIDR
+  cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
   enable_dns_support   = true
 
