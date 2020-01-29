@@ -41,7 +41,7 @@ resource "aws_instance" "server" {
       type = "winrm"
 
       ## Need to provide your own .pem key that can be created in AWS or on your machine for each provisioned EC2.
-      password = "${rsadecrypt(self.password_data, file(var.KEY_PATH))}"
+      password = rsadecrypt(self.password_data, file(var.KEY_PATH))
     }
     inline = [
       "powershell -ExecutionPolicy Unrestricted C:\\Users\\Administrator\\Desktop\\installserver.ps1 -Schedule",
