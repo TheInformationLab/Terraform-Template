@@ -1,8 +1,10 @@
 variable "ALLACCESSIPS" {
+  description = "IPs allowed full access to environment"
   type = list(string)
 }
 
 variable "ALLOWEDIPS" {
+  description = "IPs allowed full access to private areas environment"
   type = list(string)
 }
 
@@ -14,6 +16,7 @@ variable "AMIS" {
 }
 
 variable "AWS_INSTANCE" {
+  description = "Instance for server to run on. Minimum System Requirements for the AWS Instance type is m4.xlarge" 
 }
 
 variable "AWS_REGION" {
@@ -49,8 +52,8 @@ variable "admin_password" {
   default = "SuperStar!"
 }
 
-variable "AWS_ACCESS_KEY" {
-}
+# variable "AWS_ACCESS_KEY_ID" {
+# }
 
-variable "AWS_SECRET_KEY" {
-}
+# variable "AWS_SECRET_ACCESS_KEY" {
+# }
