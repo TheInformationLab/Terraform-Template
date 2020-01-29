@@ -31,6 +31,15 @@ variable "KEY_PATH" {
   default = "s3://alteryx-cf-installer/keys/TIL-USWest2.pem"
 }
 
+variable "S3_KEY_BUCKET" {
+  description = "Name of bucket where ssh key is located"
+}
+
+variable "S3_KEY_NAME_LOCATION" {
+  description = "Name of ssh key file on S3"
+}
+
+
 variable "PRIVATE_CIDRS" {
 }
 
