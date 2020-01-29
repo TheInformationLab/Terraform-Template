@@ -1,68 +1,59 @@
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# DEPLOY A SINGLE EC2 INSTANCE
-# This template runs a simple "Hello, World" web server on a single EC2 Instance
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# ------------------------------------------------------------------------------
-# CONFIGURE OUR AWS CONNECTION
-# ------------------------------------------------------------------------------
-
 provider "aws" {
-  region = "us-east-2"
+#  access_key = var.AWS_ACCESS_KEY
+#  secret_key = var.AWS_SECRET_KEY
+  region     = var.AWS_REGION
 }
-
-# ---------------------------------------------------------------------------------------------------------------------
-# ADD NETWORKING FROM MODULE
-# ---------------------------------------------------------------------------------------------------------------------
 
 module "networking" {
   source                = "./networking"
-  # VPC_CIDR              = var.VPC_CIDR
-  # PRIVATE_CIDRS         = var.PRIVATE_CIDRS
-  # ALLACCESSIPS          = var.ALLACCESSIPS
-  # ALLOWEDIPS            = var.ALLOWEDIPS
-  # AWS_AVAILABILITY_ZONE = var.AWS_AVAILABILITY_ZONE
-} 
+  VPC_CIDR              = var.VPC_CIDR
+  PRIVATE_CIDRS         = var.PRIVATE_CIDRS
+  ALLACCESSIPS          = var.ALLACCESSIPS
+  ALLOWEDIPS            = var.ALLOWEDIPS
+  AWS_AVAILABILITY_ZONE = var.AWS_AVAILABILITY_ZONE
+}
 
-# ---------------------------------------------------------------------------------------------------------------------
-# DEPLOY A SINGLE EC2 INSTANCE
-# ---------------------------------------------------------------------------------------------------------------------
+resource "aws_instance" "server" {
+  ami                      = var.AMIS[var.AWS_REGION]
+  instance_type            = var.AWS_INSTANCE
+  vpc_security_group_ids  = [module.networking.security_group_id_out]
+  subnet_id               = module.networking.subnet_id_out
 
-# module "compute" {
-#   source = "./compute"
-#   server_port = 80
-# }
-
-resource "aws_instance" "example" {
-  # Ubuntu Server 18.04 LTS (HVM), SSD Volume Type in us-east-2
-  ami                     = "ami-0c55b159cbfafe1f0"
-  instance_type           = "t2.micro"
-  vpc_security_group_ids  = [aws_security_group.ayx_public_sg.id]
-
-  user_data = <<-EOF
-              #!/bin/bash
-              echo "Hello, World" > index.html
-              nohup busybox httpd -f -p "${var.server_port}" &
-              EOF
-
+  ## Use this count key to determine how many servers you want to create.
+  count                   = 1
+  key_name                = var.KEY_NAME
   tags = {
-    Name = "terraform-example"
+    # Name                  = "Server-Cloud"
+    Name = "Server-${count.index}"
+  }
+
+  root_block_device {
+    volume_size           = var.VOLUME_SIZE
+    volume_type           = var.VOLUME_TYPE
+    delete_on_termination = true
+  }
+
+  get_password_data = true
+
+  provisioner "remote-exec" {
+    connection {
+      host = coalesce(self.public_ip, self.private_ip)
+      type = "winrm"
+
+      ## Need to provide your own .pem key that can be created in AWS or on your machine for each provisioned EC2.
+      password = "${rsadecrypt(self.password_data, file(var.KEY_PATH))}"
+    }
+    inline = [
+      "powershell -ExecutionPolicy Unrestricted C:\\Users\\Administrator\\Desktop\\installserver.ps1 -Schedule",
+    ]
+  }
+
+  provisioner "local-exec" {
+    command = "echo ${self.public_ip} >> ../public_ips.txt"
   }
 }
 
-# ---------------------------------------------------------------------------------------------------------------------
-# CREATE THE SECURITY GROUP THAT'S APPLIED TO THE EC2 INSTANCE
-# ---------------------------------------------------------------------------------------------------------------------
-
-# resource "aws_security_group" "instance" {
-#   name = "terraform-example-instance"
-
-#   # Inbound HTTP from anywhere
-#   ingress {
-#     from_port   = var.server_port
-#     to_port     = var.server_port
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-# }
+output "ec2_password" {
+  ## Need to provide your own .pem key that can be created in AWS or on your machine for each provisioned EC2.
+  value = rsadecrypt(aws_instance.server[0].password_data, file(var.KEY_PATH))
+}
