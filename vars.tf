@@ -11,7 +11,9 @@ variable "ALLOWEDIPS" {
 variable "AMIS" {
   type = map(string)
   default = {
-    us-west-2 = "ami-0b32cfb7b4e1c1d23"
+    #FIXME: currently set to default windows ami for testing.
+    #TODO: develop packer script to create base image and deploy into tf script
+    us-west-2 = "ami-0a1d405ce719bebfd" 
   }
 }
 
