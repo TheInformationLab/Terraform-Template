@@ -11,9 +11,9 @@ variable "ALLOWEDIPS" {
 variable "AMIS" {
   type = map(string)
   default = {
-    #FIXME: currently set to default windows ami for testing.
+    #FIXME: currently set to manually created ami with alteryx server installed for testing.
     #TODO: develop packer script to create base image and deploy into tf script
-    us-west-2 = "ami-0a1d405ce719bebfd" 
+    us-west-2 = "ami-0fb9f7b851eccc376"
   }
 }
 
@@ -62,9 +62,9 @@ variable "admin_password" {
   default = "SuperStar!"
 }
 
-# Required for local development.
-#variable "AWS_ACCESS_KEY_ID" {
-#}
+# # Required for local development.
+# variable "AWS_ACCESS_KEY_ID" {
+# }
 
-#variable "AWS_SECRET_ACCESS_KEY" {
-#}
+# variable "AWS_SECRET_ACCESS_KEY" {
+# }
