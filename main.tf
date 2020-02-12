@@ -15,7 +15,6 @@ module "networking" {
 
 data "aws_s3_bucket_object" "secret_key" {
   bucket = var.S3_KEY_BUCKET
-  # bucket_dom = https://alteryx-cf-installer.s3.eu-west-2.amazonaws.com
   key    = var.S3_KEY_NAME_LOCATION
 }
 
@@ -71,13 +70,4 @@ resource "aws_instance" "server" {
   provisioner "local-exec" {
     command = "echo ${self.public_ip} >> ../public_ips.txt"
   }
-}
-
-# TODO: Consider if the default password is required for remote access in the scripted process. Should this be manually accessed 
-output "ec2_password" {
-   provisioner "local-exec" {
-    command = "echo ${aws_instance.web.private_ip} >> private_ips.txt"
-  }
-  ## Need to provide your own .pem key that can be created in AWS or on your machine for each provisioned EC2.
-  value = rsadecrypt(self.password_data, "${data.aws_s3_bucket_object.secret_key.body}")
 }
