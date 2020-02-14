@@ -20,7 +20,7 @@ output "public_dns" {
 #   value = rsadecrypt(aws_instance.server.*.password_data, "${data.aws_s3_bucket_object.secret_key.body}")
 # }
 
-output "windows_password" {
-  value       = aws_instance.server.*.password_data
-  description = "Encrypted windows password"
-}
+# output "windows_password" {
+#   value       = aws_instance.server.*.password_data
+#   description = "Encrypted windows password"
+# }
