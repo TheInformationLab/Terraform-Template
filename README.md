@@ -10,7 +10,7 @@ This documentation is here to assist you with populating the information require
 |ALLACCESSIPS|String|`0.0.0.0/0`|Do not change the variabe below. Change only if you really want too.|
 |ALLOWEDIPS|String|`""`|Change these IP's for your Private network.|
 |AWS_ACCESS_KEY|String|`""`|Add your AWS Access Key here.|
-|AWS_INSTANCE|String|`m4.xlarge`|This is the minimum System Requirements for the AWS Instance type.|
+|AWS_INSTANCE|String|`m5.xlarge`|This is the minimum System Requirements for the AWS Instance type.|
 |AWS_SECRET_KEY|String|`""`|Add your AWS Secret Key here.|
 |KEY_NAME|String|`""`|Needs to match an existing SSH Key name in your AWS account (No Need for .pem extension).|
 |KEY_PATH|String|`""`|Path to the PEM key on your local machine.|

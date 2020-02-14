@@ -18,7 +18,7 @@ variable "AMIS" {
 }
 
 variable "AWS_INSTANCE" {
-  description = "Instance for server to run on. Minimum System Requirements for the AWS Instance type is m4.xlarge" 
+  description = "Instance for server to run on. Minimum System Requirements for the AWS Instance type is m5.xlarge" 
 }
 
 variable "AWS_REGION" {
