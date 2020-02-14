@@ -17,3 +17,15 @@ This documentation is here to assist you with populating the information require
 |PRIVATE_CIDRS|String|`""`|Private CIDR block for the Promote instances (Change as you see fit).|
 |VOLUME_SIZE|String|`""`|Minimum System Requirement for the Volume (100 gb) (Change as you see fit with a higher Volume size).|
 |VPC_CIDR|String|`""`|VPC CIDR (Change as you see fit).|
+
+
+## Current Manual Settings
+================================
+
+In the current configuration a number of settings are required to be manually set.
+Global terraform.tfvars. needs to be manually entered into the Terraform Vars web interface.
+
+[+] The SSH key for securing the instance needs to be manually created and saved into an S3 bucket. That bucket and then needs to be provided
+
+### In the main [vars file](.\vars.tf)
+[+] The AMI is manually set. this needs to be created from a packer script process in the target region then copied into the vars
