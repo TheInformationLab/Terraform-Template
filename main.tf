@@ -16,6 +16,11 @@ data "aws_s3_bucket_object" "secret_key" {
   key    = var.S3_KEY_NAME_LOCATION
 }
 
+# Manually defined SSH key from System Manager
+data "aws_ssm_parameter" "ssh" {
+  name = "AYXWindowsHostKey"
+}
+
 resource "aws_instance" "server" {
   ami                      = var.AMIS[var.AWS_REGION]
   instance_type            = var.AWS_INSTANCE
@@ -44,7 +49,8 @@ resource "aws_instance" "server" {
       type = "winrm"
 
       ## Need to provide your own .pem key that can be created in AWS or on your machine for each provisioned EC2.
-      password = rsadecrypt(self.password_data, "${data.aws_s3_bucket_object.secret_key.body}")
+      # password = rsadecrypt(self.password_data, "${data.aws_s3_bucket_object.secret_key.body}")
+      password = rsadecrypt(self.password_data, "${data.aws_ssm_parameter.ssh.value}")
     }
     inline = [
       "powershell -ExecutionPolicy Unrestricted C:\\Users\\Administrator\\Desktop\\installserver.ps1 -Schedule",

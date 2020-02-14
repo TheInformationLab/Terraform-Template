@@ -11,9 +11,9 @@ variable "ALLOWEDIPS" {
 variable "AMIS" {
   type = map(string)
   default = {
-    #FIXME: currently set to base windows ami created by Packer for testing.
-    #TODO: Packer script to create base image created. Automate the the call process to select the most recent ami for the selected version
-    us-west-2 = "ami-031eb7681a7e85fc1"
+    #FIXME: currently set to manually created ami with alteryx server installed for testing.
+    #TODO: develop packer script to create base image and deploy into tf script
+    us-west-2 = "ami-0fb9f7b851eccc376"
   }
 }
 
