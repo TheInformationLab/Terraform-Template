@@ -1,6 +1,4 @@
 provider "aws" {
-  # access_key = AWS_ACCESS_KEY_ID
-  # secret_key = AWS_SECRET_ACCESS_KEY 
   region     = var.AWS_REGION
 }
 
@@ -17,20 +15,6 @@ data "aws_s3_bucket_object" "secret_key" {
   bucket = var.S3_KEY_BUCKET
   key    = var.S3_KEY_NAME_LOCATION
 }
-
-# TODO: example of file provisioner for downloading from s3 bucket
-# data "aws_s3_bucket_object" "secret_key" {
-#   bucket = "awesomecorp-secret-keys"
-#   key    = "awesomeapp-secret-key"
-# }
-
-# resource "aws_instance" "example" {
-#   ## ...
-
-#   provisioner "file" {
-#     content = "${data.aws_s3_bucket_object.secret_key.body}"
-#   }
-# }
 
 resource "aws_instance" "server" {
   ami                      = var.AMIS[var.AWS_REGION]
