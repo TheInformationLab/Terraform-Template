@@ -32,7 +32,7 @@ resource "aws_instance" "server" {
   key_name                = var.KEY_NAME
   tags = {
     # Name                  = "Server-Cloud"
-    Name = "Server-${count.index}"
+    Name = "Ayx-Server-${count.index}"
   }
 
   root_block_device {
@@ -57,7 +57,7 @@ resource "aws_instance" "server" {
     ]
   }
 
-  provisioner "local-exec" {
-    command = "echo ${self.public_ip} >> ../public_ips.txt"
-  }
+  # provisioner "local-exec" {
+  #   command = "echo ${self.public_ip} >> ../public_ips.txt"
+  # }
 }
