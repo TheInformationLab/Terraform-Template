@@ -1,0 +1,10 @@
+{
+    "name": "Windows_2019_Server",
+    "ayx_build_version": "2019",
+    "region": "us-west-2",
+    "source_ami": "ami-0a1d405ce719bebfd",
+    "instance": "m5.xlarge",
+    "password": "SuperS3cr3t!1",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}"
+}
