@@ -43,19 +43,19 @@ resource "aws_instance" "server" {
 
   get_password_data = false # Set to false due to error in creation
 
-  provisioner "remote-exec" {
-    connection {
-      host = coalesce(self.public_ip, self.private_ip)
-      type = "winrm"
+  # provisioner "remote-exec" {
+  #   connection {
+  #     host = coalesce(self.public_ip, self.private_ip)
+  #     type = "winrm"
 
-      ## Need to provide your own .pem key that can be created in AWS or on your machine for each provisioned EC2.
-      # password = rsadecrypt(self.password_data, "${data.aws_s3_bucket_object.secret_key.body}")
-      password = rsadecrypt(self.password_data, "${data.aws_ssm_parameter.ssh.value}")
-    }
-    inline = [
-      "powershell -ExecutionPolicy Unrestricted C:\\Users\\Administrator\\Desktop\\installserver.ps1 -Schedule",
-    ]
-  }
+  #     ## Need to provide your own .pem key that can be created in AWS or on your machine for each provisioned EC2.
+  #     # password = rsadecrypt(self.password_data, "${data.aws_s3_bucket_object.secret_key.body}")
+  #     password = rsadecrypt(self.password_data, "${data.aws_ssm_parameter.ssh.value}")
+  #   }
+  #   inline = [
+  #     "powershell -ExecutionPolicy Unrestricted C:\\Users\\Administrator\\Desktop\\installserver.ps1 -Schedule",
+  #   ]
+  # }
 
   # provisioner "local-exec" {
   #   command = "echo ${self.public_ip} >> ../public_ips.txt"
