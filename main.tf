@@ -41,7 +41,7 @@ resource "aws_instance" "server" {
     delete_on_termination = true
   }
 
-  get_password_data = true
+  get_password_data = false # Set to false due to error in creation
 
   provisioner "remote-exec" {
     connection {
