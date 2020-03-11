@@ -5,3 +5,4 @@ terraform.exe
 
 network.7z
 terraform.tfvars
+*.exe
