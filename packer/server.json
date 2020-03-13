@@ -3,7 +3,7 @@
         {            
             "access_key": "{{user `aws_access_key`}}",
             "secret_key": "{{user `aws_secret_key`}}",
-            "ami_name": "WIN2016-AYX-{{user `ayx_build_version`}}",
+            "ami_name": "WIN2019-AYX-{{user `ayx_build_version`}}",
             "communicator": "winrm",
             "force_delete_snapshot": true,
             "force_deregister": true,

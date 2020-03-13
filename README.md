@@ -20,3 +20,4 @@ Checklist of components in the process
 - [ ] Automated SSH Key Creation
 - [ ] Separate MongoDB instances
 - [ ] Automated Maintenance scripts
+- [ ] Cloudwatch monitoring of logfiles
