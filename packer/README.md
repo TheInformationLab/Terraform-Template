@@ -13,3 +13,13 @@ This documentation is here to assist you with populating the information require
 |source_ami|String|`ami-06a0d33fc8d328de0`|This value represents the source Windows AMI for Server in the West 2 region (This value needs to be constantly updated.)|
 |instance|String|`m5.xlarge`|This value is the default minimum instance type to use for Server.|
 |password|String|`SuperS3cr3t!1`|This value represents a default passowrd for use with your AMI while it's being built. (Please update this password!)|
+
+## Packer AMI Creation steps
+
+To Create the file on a windows machine run the command 
+```PowerShell
+packer build -var-file "variables.json" server.json
+```
+```shell
+packer build -var-file="variables.json" server.json
+```
