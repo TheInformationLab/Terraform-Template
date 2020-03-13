@@ -21,8 +21,31 @@ data "aws_ssm_parameter" "ssh" {
   name = "AYXWindowsHostKey"
 }
 
+# TODO: adding dynamic AMI selection process
+data "aws_ami" "ayx_ami" {
+  most_recent      = true
+  name_regex       = "^WIN2016-AYX-.*"
+  owners           = ["self"]
+
+  filter {
+    name   = "name"
+    values = ["WIN2016-AYX-*"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
+
 resource "aws_instance" "server" {
-  ami                      = var.AMIS[var.AWS_REGION]
+  ami                      = data.aws_ami.ayx_ami.id #var.AMIS[var.AWS_REGION]
   instance_type            = var.AWS_INSTANCE
   vpc_security_group_ids  = [module.networking.security_group_id_out]
   subnet_id               = module.networking.subnet_id_out

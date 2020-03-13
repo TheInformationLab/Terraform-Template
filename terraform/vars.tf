@@ -63,7 +63,7 @@ variable "admin_password" {
 }
 
 # Required for local development.
-variable "Alteryx_Version_Number" {
+variable "ALTERYX_VERSION_NUMBER" {
   description = "What version of alteryx do you want to have installed. The set default is 2019.4"
   default = "2019.4"
 }
