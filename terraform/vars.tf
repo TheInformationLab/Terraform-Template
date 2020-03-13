@@ -62,9 +62,11 @@ variable "admin_password" {
   default = "SuperStar!"
 }
 
-# # Required for local development.
-# variable "AWS_ACCESS_KEY_ID" {
-# }
+# Required for local development.
+variable "ALTERYX_VERSION_NUMBER" {
+  description = "What version of alteryx do you want to have installed. The set default is 2019.4"
+  default = "2019.4"
+}
 
 # variable "AWS_SECRET_ACCESS_KEY" {
 # }
