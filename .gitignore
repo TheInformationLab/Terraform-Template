@@ -2,9 +2,10 @@
 *.ini
 terraform.exe
 .terraform/*
+terraform/.terraform/*
+*/terraform.tfstate
+terraform.tfvars
 
 network.7z
-terraform.tfvars
 *.exe
-*/terraform.tfstate
-alteryx aws reference
+
